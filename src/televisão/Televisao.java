@@ -18,8 +18,8 @@ public abstract class Televisao {
 
 
     String id;
-    int volume;
-    Canal canalAtual;
+    public int volume;
+    public Canal canalAtual;
 
     ArrayList<Canal> canaisDisponiveis = new ArrayList<>();
     ArrayList<Canal> canaisCadastrados = new ArrayList<>();
@@ -60,7 +60,7 @@ public abstract class Televisao {
     }
 
     /**
-     * Método get/set do Canal
+     * Método get/set do CanalAtual
      * @return
      */
 
@@ -87,6 +87,12 @@ public abstract class Televisao {
 
     }
 
+    /**
+     * Construtor padrão da classe Televisão
+     * @param id
+     * @param canaisCadastrados
+     */
+
     public Televisao(String id, ArrayList<Canal> canaisCadastrados){
 
         this.volume = 5;
@@ -100,7 +106,7 @@ public abstract class Televisao {
      * Método de cadastrar canais
      */
 
-    public abstract void cadastrarCanais(List<Canal> canais);
+    public abstract void cadastrarCanais();
 
     /**
      * Mostra quais os canais que tem
@@ -119,7 +125,6 @@ public abstract class Televisao {
     public void informarDados(){
 
         System.out.println(canalAtual);
-        System.out.println("Volume = " + volume);
 
     }
 
@@ -132,14 +137,14 @@ public abstract class Televisao {
 
     public boolean altVolume(String altVolume){
 
-        
-        
+        int vol;
+        vol = 0;
 
         if(altVolume.equalsIgnoreCase("diminuir")){
 
-            volume = this.volume + DECREMENTO;
+            vol = this.volume + DECREMENTO;
 
-            if (volume < VOLUME_MINIMO){
+            if (vol < VOLUME_MINIMO){
 
                 System.out.println("O volume não pode ser igual ou menor que ZERO!");
 
@@ -149,9 +154,9 @@ public abstract class Televisao {
 
         } else if (altVolume.equalsIgnoreCase("aumentar")){
 
-            volume = this.volume + INCREMENTO;
+            vol = this.volume + INCREMENTO;
 
-            if (volume > VOLUME_MAXIMO){
+            if (vol > VOLUME_MAXIMO){
 
                 System.out.println("O volume não pode ser maior que 10!");
 
@@ -167,7 +172,7 @@ public abstract class Televisao {
 
         }
 
-        this.setVolume(volume);
+        this.setVolume(vol);
 
         return true;
 
@@ -186,12 +191,12 @@ public abstract class Televisao {
 
         if (altCanal.equalsIgnoreCase("proximo")){
 
-            i += i;
+            i = ++i;
             i %= canaisCadastrados.size();
 
         } else if (altCanal.equalsIgnoreCase("anterior")){
 
-            i -= i;
+            i = --i;
 
             if (i >= 0){
 
@@ -217,7 +222,7 @@ public abstract class Televisao {
 
 
     public boolean verificarCanal(Canal canal){
-
+    	
         return this.canaisCadastrados.contains(canal);
 
     }
@@ -246,16 +251,10 @@ public abstract class Televisao {
                 }
 
             }
-        
+
         }
 
 
-
     }
-
-
-
-
-
 
 }

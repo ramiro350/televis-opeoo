@@ -4,13 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TVHD extends Televisao {
-	private model modelo;
+	/**
+     * Modelo da TVHD
+     */
+
+    private model modelo;
 
     public enum model {
 
         LED, PLASMA, HD;
 
     }
+
+    /**
+     * Metodo get/set do modelo
+     * @return
+     */
 
     public model getModelo(){
 
@@ -24,6 +33,13 @@ public class TVHD extends Televisao {
 
     }
 
+    /**
+     * Construtor padrão da classe TVHD
+     * @param id
+     * @param canaisDisponiveis
+     * @param modelo
+     */
+
     public TVHD(String id, ArrayList<Canal> canaisDisponiveis, model modelo){
 
         super(id, canaisDisponiveis);
@@ -31,10 +47,14 @@ public class TVHD extends Televisao {
 
     }
 
-    @Override
-    public void cadastrarCanais (List<Canal> canais){
+    /**
+     * Certifica que irá sobrescrever
+     */
 
-        for(Canal canal : canais) if (canal.isHd()) this.canaisCadastrados.add(canal);
+    @Override
+    public void cadastrarCanais (){
+    	
+        for(Canal canal : canaisDisponiveis) if (canal.isHd()) this.canaisCadastrados.add(canal);
         this.canalAtual = this.canaisCadastrados.get(canaisCadastrados.size() - 1);
 
     }
@@ -45,6 +65,8 @@ public class TVHD extends Televisao {
         return "TVHD " + modelo + "," + id + "," + canalAtual + "," + volume;
 
     }
+
+
 
 
 	
