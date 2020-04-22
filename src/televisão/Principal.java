@@ -155,7 +155,7 @@ public class Principal {
                     break;
 
                 default:
-                    System.out.println("Opção inválida!");
+                    System.exit(0);
                     break;
 
             }
